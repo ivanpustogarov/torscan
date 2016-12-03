@@ -44,7 +44,7 @@ or like this:
 	1480733034 : 197-231-221-211.9001(4), ... ,85-214-68-105.9001(15),45-32-55-88.10068(3),
 
 The first field is the timestamp of when the scan was started.
-Codes in brackets (4) indicate give the connections status.
+Codes in brackets (4) indicate the connections' status.
 E.g. (4) means that there is an open TLS connections with relay at 78-47-61-94.443.
 
 Result encoding
