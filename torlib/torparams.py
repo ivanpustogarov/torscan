@@ -1,0 +1,23 @@
+# Copyright (c) 2014-2015 Ralf Weinmann
+# Distributed under the MIT/X11 software license, see the accompanying
+# file LICENSE or http://www.opensource.org/licenses/mit-license.php.
+
+TOR_CERTS_LIFETIME = (60 * 60 * 24 * 365)
+HASH_LEN           = 20
+KEY_LEN            = 16
+DH_LEN             = 128
+DH_SEC_LEN         = 40
+PK_ENC_LEN         = 128
+PK_PAD_LEN         = 42
+HASH_LEN           = 20
+CIPHER_LEN         = 16
+CELL_LEN           = 512
+
+TOR_DH_PRIME = int("FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E08"
+                   "8A67CC74020BBEA63B139B22514A08798E3404DDEF9519B3CD3A431B"
+                   "302B0A6DF25F14374FE1356D6D51C245E485B576625E7EC6F44C42E9"
+                   "A637ED6B0BFF5CB6F406B7EDEE386BFB5A899FA5AE9F24117C4B1FE6"
+                   "49286651ECE65381FFFFFFFFFFFFFFFF", 16)
+TOR_DH_GEN   = 2
+
+CLIENT_DH_EXPONENT = "123456789123456789AA"
