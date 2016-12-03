@@ -8,7 +8,7 @@ circuits the relays stay disconnected.
 (Last tested on Debin 8.6 (jessie).)
 This tool allows one to to check if two Tor relays have a TLS connection 
 (and determine if there are Tor circuits going throug these relays). It
-is based on the feature of the Tor protocol called "Canonical connection". See
+is based on the feature of the Tor protocol called "Canonical connections". See
 https://gitweb.torproject.org/torspec.git/tree/tor-spec.txt, section 5.3.1.
 
 
@@ -20,8 +20,8 @@ Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 Here is an example how to check if two relays are connected.
 This will first download Tor relays information and create onion skins;
 it will save this info in file 'netstate'.
-The we do actual scan be calling ./torscan.py which will use check
-if Tor relay running at 69.195.146.214:443 is connected with Tor relay running
+Then we do the actual scan by calling './torscan.py' which will check
+if the relay running at 69.195.146.214:443 is connected with the relay running
 at 78.47.61.94:443.
 
 	$ ./getconsensus.py     
