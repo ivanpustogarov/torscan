@@ -5,7 +5,8 @@ The Tor network is often considered as a fully connected graph. This is only an
 approximation though: if no current users chose two relays as a part of their
 circuits the relays stay disconnected.
 
-This tool allows one to to check if two Tor relays have a TLS connection. This
+This tool allows one to to check if two Tor relays have a TLS connection 
+(and determine if there are Tor circuits going throug these relays). This
 is base on the feature of the Tor protocol called "Canonical connection". See
 https://gitweb.torproject.org/torspec.git/tree/tor-spec.txt, section 5.3.1.
 Last tested on Debin 8.6 (jessie).
@@ -29,15 +30,16 @@ This will print some debug info in the console.
 After the scan is finished, it will generate two files:
 
 	1480730709.canonicalScan.69-195-146-214.443.errors
-        1480730709.canonicalScan.69-195-146-214.443.log
+	1480730709.canonicalScan.69-195-146-214.443.log
 
-69-195-146-214.433 is the router that we were scanning
+69-195-146-214.433 is the router that we were scanning.
 The errors file contains the copy of the console debug output.
 The log file is the one you need, it will contains something like this:
 
 	1480730709 : 78-47-61-94.443(4),
 
 or like this:
+
 	1480733034 : 197-231-221-211.9001(4), ... ,85-214-68-105.9001(15),45-32-55-88.10068(3),
 
 The first field is the timestamp of when the scan was started.
@@ -59,11 +61,11 @@ Files
 
 	getconsensus.py -- Script to download conesensus/router descriptors and compute onion skins
 	torscan.py -- The main program
-        torlib/ -- python modules which do all the job
-          torlib/xorcpp.so -- 64-bit shared object which implements XOR 
-          torlib/xorcpp/ -- the source code for xorcpp. You will need some dependencies to recompile it 
-          torlib/pyubals -- pyublas 
-	  ...
+	torlib/ -- python modules which do all the job
+	  torlib/xorcpp.so -- 64-bit shared object which implements XOR 
+	  torlib/xorcpp/ -- the source code for xorcpp. You will need some dependencies to recompile it 
+	  torlib/pyubals -- pyublas 
+	   ...
 	router-list.example -- example of an input file with Tor relays
 	LICENSE -- MIT licence
 
