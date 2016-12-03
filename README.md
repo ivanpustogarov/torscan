@@ -5,11 +5,12 @@ The Tor network is often considered as a fully connected graph. This is only an
 approximation though: if no current users chose two relays as a part of their
 circuits the relays stay disconnected.
 
+(Last tested on Debin 8.6 (jessie).)
 This tool allows one to to check if two Tor relays have a TLS connection 
 (and determine if there are Tor circuits going throug these relays). It
 is based on the feature of the Tor protocol called "Canonical connection". See
 https://gitweb.torproject.org/torspec.git/tree/tor-spec.txt, section 5.3.1.
-Last tested on Debin 8.6 (jessie).
+
 
 This tool implements the technique described in the paper
 "TorScan: Tracing Long-lived Connections and Differential Scanning Attacks" by
