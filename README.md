@@ -30,7 +30,7 @@ libboost and pyublas (ncluded)).
 	$ make
 	$ cd ../
 	$ make
-	$ cp xorcpp.so ../
+	$ cd ../../
 
 Example
 ===============
