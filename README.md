@@ -17,6 +17,24 @@ This tool implements the technique described in the paper
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 (https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
 
+Setup
+===============
+
+Firt you will need to compile some piece of cpp code, this is a fast version of
+'xor' which is used in our Tor crypto implementation (this cpp code relies on
+libboost and pyublas (ncluded)).
+
+	$ sudo apt-get install python-m2crypto python-pyasn1 python-numpy libboost-dev
+	$ cd torlib/xorcpp/pyublas
+	$ ./configure.py
+	$ make
+	$ cd ../
+	$ make
+	$ cp xorcpp.so ../
+
+Example
+===============
+
 Here is an example how to check if two relays are connected.
 This will first download Tor relays information and create onion skins;
 it will save this info in file 'netstate'.
@@ -24,7 +42,6 @@ Then we do the actual scan by calling './torscan.py' which will check
 if the relay running at 69.195.146.214:443 is connected with the relay running
 at 78.47.61.94:443.
 
-	$ sudo apt-get install python-m2crypto python-pyasn1 python-numpy
 	$ ./getconsensus.py     
 	$ ./torscan.py -n netstate -t 78.47.61.94:443 69.195.146.214:443
 
@@ -40,10 +57,6 @@ The log file is the one you need, it will contains something like this:
 
 	1480730709 : 78-47-61-94.443(4),
 
-or like this:
-
-	1480733034 : 197-231-221-211.9001(4), ... ,85-214-68-105.9001(15),45-32-55-88.10068(3),
-
 The first field is the timestamp of when the scan was started.
 Codes in brackets (4) indicate the connections' status.
 E.g. (4) means that there is an open TLS connections with relay at 78-47-61-94.443.
@@ -54,6 +67,23 @@ Result encoding
 	code 4 (as in the example above) indicates that relays are connected.
 	codes from 5 to 16 indicate that there is not connection between the realays
 	codes from 0 to 3 inidicate that the scan was not finished for this relay.
+
+Assume you scanned router 69.195.146.214:443 for connectivity with the rest of
+the network using the follwoing command:
+
+	$ ./torscan.py -n netstate 69.195.146.214:443
+
+A log file '1480730709.canonicalScan.69-195-146-214.443.log' will be generated with
+the following content:
+
+	1480733034 : 197-231-221-211.9001(4), ... ,85-214-68-105.9001(15),45-32-55-88.10068(3),
+
+The first field (1480733034) is the timestamp of when the scan started.
+This is followed by the list of Tor relays with corresponding connectivity codes. For example:
+
+	'197-231-221-211.9001(4)' means that '69-195-146-214.443' is connected to 197-231-221-211.9001.
+	'85-214-68-105.9001(15)' means that '69-195-146-214.443' is not connected to 85-214-68-105.9001.
+	'45-32-55-88.10068(3)' means that we did not finish the scan for 45-32-55-88.10068.
 
 See file torlib/torscantoolbox.py for the corresponding codes and exact Tor cells that
 this tool receives
