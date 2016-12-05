@@ -363,12 +363,13 @@ def receive_cells(errors_fd,orconn,pending_cells, circuits):
 
 
 
-def doScan(errors_fd,orconn,pending_cells,circuits,num_to_finish,maxScanTimeSecs):
+# @param interrupt_event threading.Event object used to tell when the thread should exit
+def doScan(errors_fd,orconn,pending_cells,circuits,num_to_finish,maxScanTimeSecs, interrupt_event):
 
     start_scan_time = current_time = time()
     num_finished = 0
     # Start sedning and receiving the cells    
-    while (num_finished < num_to_finish) and ( (time()-start_scan_time)<maxScanTimeSecs ) :
+    while (num_finished < num_to_finish) and ( (time()-start_scan_time)<maxScanTimeSecs ) and not(interrupt_event.isSet()):
 
         time_left = maxScanTimeSecs - (time() - start_scan_time)
         if time_left < 0:
@@ -432,7 +433,8 @@ def get_num_of_alive_threads():
 
 
 # This is main function to scan the tor relay
-def scan_torrouter(err_fd,routers_list, router_hostname, router_port, maxScanTimeSecs):
+# @param interrupt_event threading.Event object used to tell when the thread should exit
+def scan_torrouter(err_fd,routers_list, router_hostname, router_port, maxScanTimeSecs, interrupt_event):
     start_scan_torrouter = int(time()) 
     errors_fd = err_fd 
  
@@ -468,7 +470,7 @@ def scan_torrouter(err_fd,routers_list, router_hostname, router_port, maxScanTim
     time_to_scan_left = maxScanTimeSecs - (time()-start_scan_torrouter)
     print "{0}: {1} secs left for scan.".format(threading.currentThread().name,int(time_to_scan_left))
     err_fd.write("{0}: {1} secs left for scan.\n".format(threading.currentThread().name,int(time_to_scan_left)))
-    doScan(errors_fd,orconn,pending_cells,circuits,num_to_finish,time_to_scan_left)
+    doScan(errors_fd,orconn,pending_cells,circuits,num_to_finish,time_to_scan_left, interrupt_event)
     
     #Time to remove temporary key files    
     remove_files(filenames)

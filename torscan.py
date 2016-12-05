@@ -30,6 +30,7 @@ import cProfile
 import random
 import copy
 import traceback
+import signal
 
 TOR_NET_STATE_LAST_UPDATE = -1
 tor_net_state_file_lock = threading.Lock()
@@ -45,6 +46,17 @@ class configParams:
     scan_target_ip = None
     scan_target_port = 0
     times_to_scan = None
+
+def terminate_threads():
+    ev.set()
+
+def signal_handler(signal, frame):
+    terminate_threads()
+
+def wait_fo_signal():
+    signal.signal(signal.SIGINT, signal_handler)
+    
+
 
 def print_usage_and_exit():
     print """Usage: 
@@ -187,7 +199,7 @@ def ScanRouter(ip_address_to_scan,port_to_scan, _routers_list, should_be_uptodat
     try:
         print "{0}: {1} : Starting scan {5} of {2}:{3}! We are going to stop when {4} secs elapsed... ".format(threading.currentThread().name,start_scan_time, ip_address_to_scan, port_to_scan,configParams.max_scan_time,scan_num)
         errors_fd.write("{0}: {1} : Starting scan {5} of {2}:{3}! We are going to stop when {4} secs elapsed... \n".format(threading.currentThread().name,start_scan_time, ip_address_to_scan, port_to_scan,configParams.max_scan_time,scan_num))
-        onion_circuits = scan_torrouter(errors_fd,routers_list,ip_address_to_scan,port_to_scan,configParams.max_scan_time)
+        onion_circuits = scan_torrouter(errors_fd,routers_list,ip_address_to_scan,port_to_scan,configParams.max_scan_time, ev)
         end_scan_time = time()
         print "{0}: The scan took {1} seconds".format(threading.currentThread().name,end_scan_time-start_scan_time)
         errors_fd.write("{0}: The scan took {1} seconds\n".format(threading.currentThread().name,end_scan_time-start_scan_time))
@@ -258,6 +270,7 @@ def main():
     else:
       targets=copy.copy(routers_list)
     
+    threads = list()
     for r in configParams.routers_to_scan:
         tokens = r.split(":")
 	if(len(tokens) != 2):
@@ -269,16 +282,31 @@ def main():
         rtr = tordirinfo.getRouterByIpAndPort(ip_address_to_scan,port_to_scan,routers_list)
         if rtr:
             print "{0}: Creating scanner for {1}:{2}, bw = {3}".format(threading.currentThread().name,ip_address_to_scan,port_to_scan,rtr.bandwidth_from_consensus)
-            threading.Thread(target = ScanRouter,\
+            thr = threading.Thread(target = ScanRouter,\
                args=(ip_address_to_scan,port_to_scan,targets),\
-               name = "scanner.{0}.{1}".format(ip_address_to_scan.replace('.','-'),port_to_scan)).start()
+               name = "scanner.{0}.{1}".format(ip_address_to_scan.replace('.','-'),port_to_scan))
+	    threads.append(thr)
+	    thr.start()
         else:
             print "{0}: {1}:{2} was not in the network state.".format(threading.currentThread().name,ip_address_to_scan,port_to_scan)
         
-    wait_nonmain_threads_dead()
+    tmer = threading.Timer(configParams.max_scan_time, terminate_threads)
+    tmer.daemon = True
+    tmer.start() 
+    signal.signal(signal.SIGINT, signal_handler)
+    while(not(ev.isSet())):
+        sleep(1)
+	all_dead = True
+        for thread in threads:
+            if thread.is_alive():
+	        all_dead = False
+		break
+	if(all_dead):
+	    ev.set()
+    tmer.cancel()
     print "Scan is finished!"
     
-    
 if __name__ == "__main__":
+  ev = threading.Event()
   main()
     
