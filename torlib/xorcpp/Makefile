@@ -18,6 +18,7 @@ $(TARGET).so: $(TARGET).o
 	$(TARGET).o -L$(BOOST_LIB) -lboost_python \
 	-L$($PYTHON_LIB)/config -lpython2.7 -lm \
 	-o $(TARGET).so
+	cp $(TARGET).so ../
 
 $(TARGET).o: $(TARGET).cpp
 	g++ -I$(PYTHON_INC) -I$(BOOST_INC) -I$(PYUBLAS) -c -lm -fPIC $(TARGET).cpp
