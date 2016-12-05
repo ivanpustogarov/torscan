@@ -114,7 +114,7 @@ def update_router_from_desc(router,router_list):
             print "We have %d descriptors so far" % NUMBER_OF_DOWNLOADED_DESCRIPTORS
         NUMBER_OF_DOWNLOADED_DESCRIPTORS_lock.release()
     else:
-        print "Was not able to download desc for %s. No key material will be available: take care when creating onion skins." % router.fingerprint
+        print "Was not able to download desc for {}. No key material will be available: take care when creating onion skins.".format(router.fingerprint)
         
     
 def wait_nonmain_threads_dead():
