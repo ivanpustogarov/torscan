@@ -29,6 +29,7 @@ import M2Crypto
 import cProfile
 import random
 import copy
+import traceback
 
 TOR_NET_STATE_LAST_UPDATE = -1
 tor_net_state_file_lock = threading.Lock()
@@ -231,6 +232,8 @@ def ScanRouter(ip_address_to_scan,port_to_scan, _routers_list, should_be_uptodat
         errors_fd.write(errmsg)
         errors_fd.write(repr(sys.exc_info()))
         errors_fd.write("\n")
+        tb = traceback.format_exc()
+        print tb
         errors_fd.flush()
 
     logs_fd.close()
