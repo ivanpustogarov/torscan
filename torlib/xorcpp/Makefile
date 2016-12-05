@@ -6,6 +6,7 @@ TARGET = xorcpp
 
 PYTHON_INC = /usr/include/python2.7
 PYTHON_LIB = /usr/lib/python2.7
+PYTHON_NUMPY = $(shell python -c "import numpy; print numpy.get_include()")
 
 # location of the Boost Python include files and library
 
@@ -21,7 +22,7 @@ $(TARGET).so: $(TARGET).o
 	cp $(TARGET).so ../
 
 $(TARGET).o: $(TARGET).cpp
-	g++ -I$(PYTHON_INC) -I$(BOOST_INC) -I$(PYUBLAS) -c -lm -fPIC $(TARGET).cpp
+	g++ -I$(PYTHON_INC) -I$(BOOST_INC) -I$(PYUBLAS) -I$(PYTHON_NUMPY) -c -lm -fPIC $(TARGET).cpp
 
 clean:
 	rm -f *.so *.o *.dll *.a *~ core
