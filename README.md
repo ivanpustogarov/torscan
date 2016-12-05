@@ -24,6 +24,7 @@ Then we do the actual scan by calling './torscan.py' which will check
 if the relay running at 69.195.146.214:443 is connected with the relay running
 at 78.47.61.94:443.
 
+	$ sudo apt-get install python-m2crypto python-pyasn1 python-numpy
 	$ ./getconsensus.py     
 	$ ./torscan.py -n netstate -t 78.47.61.94:443 69.195.146.214:443
 
