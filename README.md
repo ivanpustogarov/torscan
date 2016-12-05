@@ -94,7 +94,6 @@ Files
 	getconsensus.py -- Script to download conesensus/router descriptors and compute onion skins
 	torscan.py -- The main program
 	torlib/ -- python modules which do all the job
-	  torlib/xorcpp.so -- 64-bit shared object which implements XOR 
 	  torlib/xorcpp/ -- the source code for xorcpp. You will need some dependencies to recompile it 
 	  torlib/pyubals -- pyublas 
 	   ...
