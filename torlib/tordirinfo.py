@@ -4,7 +4,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file LICENSE or http://www.opensource.org/licenses/mit-license.php.
 
-import re, string, sys, urllib, base64, boto, pickle,urllib2,torcrypto
+import re, string, sys, urllib, base64, pickle,urllib2,torcrypto
 import StringIO
 from random import randint
 from operator import itemgetter, attrgetter
