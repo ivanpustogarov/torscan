@@ -9,6 +9,8 @@ netstate
 *.o
 *.so
 *.pyc
+*.log
+*.errors
 
 # Packages #
 ############
