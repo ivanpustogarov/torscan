@@ -16,8 +16,8 @@ This tool implements the technique described in the paper
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 (https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
 
-(Tested on Debian 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
-will not work on MacOS)
+__(Tested on Debian 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
+will not work on MacOS)__
 
 Setup
 ===============
