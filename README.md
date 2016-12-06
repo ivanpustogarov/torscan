@@ -22,7 +22,7 @@ will not work on MacOS)
 Setup
 ===============
 
-First you will need to compile some piece of cpp code, this is a fast version of
+First you will need to compile a piece of cpp code, this is a fast version of
 'xor' which is used in our Tor crypto implementation (this cpp code relies on
 libboost and pyublas (ncluded)).
 
