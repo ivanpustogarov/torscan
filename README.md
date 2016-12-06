@@ -5,7 +5,6 @@ The Tor network is often considered as a fully connected graph. This is only an
 approximation though: if no current users chose two relays as a part of their
 circuits the relays stay disconnected.
 
-(Last tested on Debin 8.6 (jessie).)
 This tool allows one to to check if two Tor relays have a TLS connection 
 (and determine if there are Tor circuits going throug these relays). It
 is based on the feature of the Tor protocol called "Canonical connections". See
@@ -17,10 +16,13 @@ This tool implements the technique described in the paper
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 (https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
 
+(Tested on Debin 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
+will not work on MacOS)
+
 Setup
 ===============
 
-Firt you will need to compile some piece of cpp code, this is a fast version of
+First you will need to compile some piece of cpp code, this is a fast version of
 'xor' which is used in our Tor crypto implementation (this cpp code relies on
 libboost and pyublas (ncluded)).
 
@@ -94,7 +96,6 @@ Files
 	getconsensus.py -- Script to download conesensus/router descriptors and compute onion skins
 	torscan.py -- The main program
 	torlib/ -- python modules which do all the job
-	  torlib/xorcpp.so -- 64-bit shared object which implements XOR 
 	  torlib/xorcpp/ -- the source code for xorcpp. You will need some dependencies to recompile it 
 	  torlib/pyubals -- pyublas 
 	   ...
