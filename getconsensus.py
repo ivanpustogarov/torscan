@@ -8,6 +8,7 @@ import sys
 from torlib import tordirinfo
 import random, threading
 from time import time
+import signal
 
 VERSION = 1.00
 NUMBER_OF_DOWNLOADED_DESCRIPTORS = 0
@@ -44,6 +45,10 @@ class ConfigParams:
         if len(arg_list) > 1:
             print "Unknown params: {}".format(arg_list[1:])
     	    print_usage_and_exit()
+
+def signal_handler(signal, frame):
+    print "Received CTRL-C. Exiting, no clean-up done"
+    sys.exit(0)
         
 
 def print_usage_and_exit():
@@ -147,10 +152,14 @@ def load_descriptors_from_authorities(routers_list):
     print "Loading descriptors from default authorities (it might take a while)... "
     #router_list_lock = threading.Lock()
     i=0
+    threads = list()
     for r in routers_list:    
-        threading.Thread(target = update_router_from_desc,\
+        thr = threading.Thread(target = update_router_from_desc,\
                 args=(r,routers_list),\
-                name = "fetcher-{0}".format(i)).start()
+                name = "fetcher-{0}".format(i))
+	threads.append(thr)
+	thr.daemon=True
+	thr.start()
     
         while (get_num_of_alive_threads()>300):
             pass
@@ -171,6 +180,7 @@ def main():
     routers_list = tordirinfo.getRoutersFromConsensus(consensus_txt)
     print "We have %d fingerprints" % len(routers_list)
     
+    signal.signal(signal.SIGINT, signal_handler)
     if config_params.download_descriptors == True:
         load_descriptors_from_authorities(routers_list)
     else:
@@ -192,6 +202,7 @@ def main():
     print "File is created! See \"{0}\"".format(config_params.tor_net_state_filename)
 
 if __name__ == "__main__":
+    ev = threading.Event()
     main()
 
 

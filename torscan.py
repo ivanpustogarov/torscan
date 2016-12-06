@@ -51,6 +51,7 @@ def terminate_threads():
     ev.set()
 
 def signal_handler(signal, frame):
+    print "Received CTRL-C. Notifying threads."
     terminate_threads()
 
 def wait_fo_signal():
