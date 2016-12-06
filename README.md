@@ -5,8 +5,6 @@ The Tor network is often considered as a fully connected graph. This is only an
 approximation though: if no current users chose two relays as a part of their
 circuits the relays stay disconnected.
 
-(Tested on Debin 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
-will not work on MacOS)
 This tool allows one to to check if two Tor relays have a TLS connection 
 (and determine if there are Tor circuits going throug these relays). It
 is based on the feature of the Tor protocol called "Canonical connections". See
@@ -17,6 +15,9 @@ This tool implements the technique described in the paper
 "TorScan: Tracing Long-lived Connections and Differential Scanning Attacks" by
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 (https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
+
+(Tested on Debin 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
+will not work on MacOS)
 
 Setup
 ===============
