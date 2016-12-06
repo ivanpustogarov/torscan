@@ -224,7 +224,7 @@ class ORConnection:
             #data = self.socket.read(CELL_LEN-len(self.buffer))
             data = self.socket.read(CELL_LEN*8)
         except SSL.SSLError as errno:
-            print "SSLError exception caught after reading d bytes: %s"     % (len(data), errno)
+            print "SSLError exception caught after reading d bytes: {}; {}".format(len(data), errno)
             raise TorException("SSL ERROR")
             return None 
             
