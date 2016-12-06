@@ -16,15 +16,15 @@ This tool implements the technique described in the paper
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 (https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
 
-(Tested on Debin 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
+(Tested on Debian 8.6 (jessie) and Ubuntu 14.04. Probably will not work on Ubuntu 16.04;
 will not work on MacOS)
 
 Setup
 ===============
 
-First you will need to compile some piece of cpp code, this is a fast version of
+First you will need to compile a piece of cpp code, this is a fast version of
 'xor' which is used in our Tor crypto implementation (this cpp code relies on
-libboost and pyublas (ncluded)).
+libboost and pyublas (included)).
 
 	$ sudo apt-get install python-m2crypto python-pyasn1 python-numpy libboost-dev python-dev libboost-python-dev
 	$ cd torlib/xorcpp/pyublas
