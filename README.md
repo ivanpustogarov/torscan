@@ -14,7 +14,8 @@ https://gitweb.torproject.org/torspec.git/tree/tor-spec.txt, section 5.3.1.
 This tool implements the technique described in the paper
 "TorScan: Tracing Long-lived Connections and Differential Scanning Attacks" by
 Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
-(https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf)
+(https://www.freehaven.net/anonbib/papers/torscan-esorics2012.pdf). The idea to use 
+"Canonical connections" to discover Tor relay connectivity is due to Ralf.
 
 __(Tested on Debian 8.6 (jessie) and Ubuntu 14.04. Will not work on Ubuntu 16.04;
 will not work on MacOS)__
@@ -122,4 +123,5 @@ This will scan two relays from router-list.example and create two log files.
 	 --> 1480733447.canonicalScan.95-211-205-151.443.log
 
 
-BC:14iyH71Y9kEDUXdQCytizPNTvFNAUUn3do 
+authors: Ivan Pustogaov, Ralf Weinmann
+BC:14iyH71Y9kEDUXdQCytizPNTvFNAUUn3do
