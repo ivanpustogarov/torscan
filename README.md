@@ -20,8 +20,7 @@ Alex Biryukov, Ivan Pustogarov, and Ralf Philipp Weinmann.
 __(Tested on Debian 8.6 (jessie) and Ubuntu 14.04. Will not work on Ubuntu 16.04;
 will not work on MacOS)__
 
-Setup
-===============
+## Setup
 
 First you will need to compile a piece of cpp code, this is a fast version of
 'xor' which is used in our Tor crypto implementation (this cpp code relies on
@@ -35,8 +34,7 @@ libboost and pyublas (included)).
 	$ make
 	$ cd ../../
 
-Example
-===============
+## Example
 
 Here is an example how to check if two relays are connected.
 This will first download Tor relays information and create onion skins;
@@ -64,8 +62,7 @@ The first field is the timestamp of when the scan was started.
 Codes in brackets (4) indicate the connections' status.
 E.g. (4) means that there is an open TLS connections with relay at 78-47-61-94.443.
 
-Result encoding
-===============
+## Result encoding
 
 	code 4 (as in the example above) indicates that relays are connected.
 	codes from 5 to 16 indicate that there is not connection between the realays
@@ -91,8 +88,7 @@ This is followed by the list of Tor relays with corresponding connectivity codes
 See file torlib/torscantoolbox.py for the corresponding codes and exact Tor cells that
 this tool receives
 
-Files
-=====
+## Files
 
 	getconsensus.py -- Script to download conesensus/router descriptors and compute onion skins
 	torscan.py -- The main program
@@ -103,8 +99,7 @@ Files
 	router-list.example -- example of an input file with Tor relays
 	LICENSE -- MIT licence
 
-Dependencies
-============
+## Dependencies
 These are probably not all the dependencies:
 
 	Python (>= 2.4)
@@ -113,8 +108,7 @@ These are probably not all the dependencies:
 	hashlib (included in Python >= 2.5)
 
 
-Other examples
-==============
+## Other examples
 
 This will scan two relays from router-list.example and create two log files.
 
